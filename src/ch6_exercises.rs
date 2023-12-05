@@ -1,12 +1,22 @@
-//! This exercise asks you to implement a very simple Turing machine, which
-//! outputs a binary string of alternating 0's and 1's onto its tape.
-//! Most of the implementation is already in place, but you need to
+//! Implement a simple Turing machine that outputs a tape with a binary sequence of alternating 0s
+//! and 1s. Most of the implementation is complete. Your task is to use enums and match statements
+//! to finish the logic.
+//!
+//! State transition logic:
+//! 1. Read the value at the tape's current position.
+//! 2. Move the head right (increment the position variable by 1).
+//! 3. Write a 1 at the new position if the previous was 0, or write a 0 if the previous was 1.
+//!
+//! As a result, the tape can end in one of two valid configurations:
+//! 1. [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+//! 2. [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
 
+// Possible states of the Turing machine
 // The Halted state contains the symbol at the current head position
 #[derive(Debug, PartialEq)]
 enum State {
 	Running,
-	Halted(u8), // Storing the value at the halt position
+	Halted(u8),
 }
 
 struct TuringMachine {
@@ -18,7 +28,7 @@ struct TuringMachine {
 impl TuringMachine {
 	fn new() -> Self {
 		TuringMachine {
-			tape: vec![0; 10], // Starting with a tape of a certain size, all zeros
+			tape: vec![0; 10], // Starting with a tape of fixed size 10
 			position: 0,
 			state: State::Running,
 		}
@@ -28,12 +38,15 @@ impl TuringMachine {
 		if self.position < self.tape.len() - 1 {
 			self.position += 1;
 		} else {
-			// Halt if we're at the last position without overwriting
+			// Halt if we're at the last position of the tape
 			let value_at_halt = self.tape[self.position];
 			self.state = State::Halted(value_at_halt);
 		}
 	}
 
+	// Calculate one step of the Turing machine.
+	// Note: I think this is where most of the exercise should happen, i.e. readers would need to
+	// implement proper match statements and make all tests pass
 	fn step(&mut self) {
 		if let State::Running = self.state {
 			let current_value = self.tape.get(self.position).copied().unwrap_or(0);
@@ -45,10 +58,10 @@ impl TuringMachine {
 						1 => 0,
 						_ => {
 							self.state = State::Halted(current_value);
-							return;
-						}
+							return
+						},
 					};
-				}
+				},
 				_ => return,
 			}
 		}
