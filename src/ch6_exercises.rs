@@ -6,6 +6,7 @@
 //! 1. Read the value at the tape's current position.
 //! 2. Move the head right (increment the position variable by 1).
 //! 3. Write a 1 at the new position if the previous was 0, or write a 0 if the previous was 1.
+//! 4. Repeat until end of tape is reached.
 //!
 //! As a result, the tape can end in one of two valid configurations:
 //! 1. [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
