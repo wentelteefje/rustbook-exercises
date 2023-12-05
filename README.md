@@ -3,7 +3,7 @@
 - To model the exercises to the text, we should carefully note which concepts are presented and strive to incorporate as many of these concepts into the exercises as possible (ideally touching on all concepts in the exercises—obviously).
 - There are generally different categories of exercises. Some examples include:
     - Exercises asking the reader to extend an example already given in the chapter by adding some functionality (typically not very interesting on their own, but they reinforce the point). An example is the following:
-    > IPv4 addresses are classified into classes (A, B, C, D, E). The class for a given IPv4 address can be derived from its first byte (also known as the first octet). If it's between 0-127, it's A; from 128-191, it's B; from 192-223, it's C; from 224-239, it's D; and for all other values, it's classified as E. Given the IpAddr enum from the text, implement a method `ip_class` to return the correct class as an `Option<char>`.
+    > IPv4 addresses are classified into classes (A, B, C, D, E). The class for a given IPv4 address can be derived from its first byte (also known as the first octet). If it's between 0-127, it's A; from 128-191, it's B; from 192-223, it's C; from 224-239, it's D; and for all other values, it's classified as E. Given the IpAddr enum from the text, implement a method `ip_class` to return the correct class as an `Option<char>`. For IPv6 addresses return `None`.
     
     This would be a correct solution to this exercise:
     ```rust
