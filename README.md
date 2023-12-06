@@ -30,10 +30,10 @@
 ### 2.1 Presented Concepts
 These lists can be used to keep track of which material to include in exercises.
 #### In "6.1 Defining an Enum":
-- Enum definition, i.e. `enum Name { ... }`.
+- `enum` definition, i.e. `enum Name { ... }`.
 - Instance creation and double colon syntax, e.g. `let four = IpAddrKind::V4;`.
 - Enum type as function parameter, e.g. `rustfn route(ip_kind: IpAddrKind) {}`.
-- Storing data inside of enums, e.g. 
+- Storing data inside of enum variants (variants with values), e.g. 
 ```rust
 enum IpAddr { 
 	V4(String),
@@ -41,7 +41,7 @@ enum IpAddr {
 }
 let home = IpAddr::V4(String::from("127.0.0.1"));
 ```
-- Using different types for each variant in Enum definition
+- Using different types for each variant in `enum` definition
 ```rust
 enum IpAddr {
 	V4(u8, u8, u8, u8),
@@ -50,5 +50,21 @@ enum IpAddr {
 ```
 - Defining methods on Enums using `impl`
 - Special enum `Option<T>`
-#### In "6.2 The match Control Flow Construct":
-...you get the point.
+#### In "6.2 The `match` Control Flow Construct":
+- `match` expression
+- use of curly brackets for multiple lines of code in a `match` arm (see next example)
+- binding pattern variables to value of a variant, e.g.
+```rust
+match coin{
+    Coin::Quarter(state) => {
+        println!("State quarter from {:?}!", state);
+        25
+    }
+    // -snip-
+}
+```
+- matching `Option<T>`'s
+- important: `match` statements in Rust must be exhaustive
+- catch-all patterns and `_` placeholder
+#### In "6.3 Concise Control Flow with `if let`"
+- `if let` syntax
