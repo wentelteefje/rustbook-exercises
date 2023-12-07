@@ -3,3 +3,4 @@
 #![allow(unused_macros)]
 
 pub mod ch6_exercises;
+pub mod ch6_exercises_sol;

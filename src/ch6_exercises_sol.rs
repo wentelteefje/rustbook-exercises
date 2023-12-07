@@ -11,7 +11,16 @@ enum IpAddr {
 
 impl IpAddr {
 	fn ip_class(&self) -> Option<char> {
-		todo!();
+		match self {
+			IpAddr::V4(a, _, _, _) => Some(match a {
+				0..=127 => 'A',
+				128..=191 => 'B',
+				192..=223 => 'C',
+				224..=239 => 'D',
+				_ => 'E',
+			}),
+			IpAddr::V6(_) => None,
+		}
 	}
 }
 // Ex. 2
@@ -62,10 +71,26 @@ impl TuringMachine {
 		}
 	}
 
-	/// Calculate one step of the Turing machine as per the logic given above
+	/// Calculate one step of the Turing machine.
+	/// Note: I think this is where most of the exercise should happen, i.e. readers would need to
+	/// implement proper match statements and make all tests pass
 	fn step(&mut self) {
 		if let State::Running = self.state {
-            todo!()
+			let current_value = self.tape.get(self.position).copied().unwrap_or(0);
+			self.move_head_right();
+			match self.state {
+				State::Running => {
+					self.tape[self.position] = match current_value {
+						0 => 1,
+						1 => 0,
+						_ => {
+							self.state = State::Halted(current_value);
+							return
+						},
+					};
+				},
+				_ => return,
+			}
 		}
 	}
 
